@@ -8,19 +8,18 @@
 
 	type Props = ComponentProps<Markdown>;
 
-	let { components: _components = {}, directives, options: _options = {}, src }: Props = $props();
+	let { ast, components = {}, directives, options = {}, src }: Props = $props();
 
-	let components = $derived.by(() => ({
-		inlineMath: InlineMath,
-		math: Math,
-		..._components
-	}));
+	let _components = $derived({ inlineMath: InlineMath, math: Math, ...components });
 
-	let options = $derived.by(() => ({
-		..._options,
-		extensions: [...(_options.extensions ?? []), math()],
-		mdastExtensions: [...(_options.mdastExtensions ?? []), mathFromMarkdown()]
-	}));
+	let _options = $derived.by(() => {
+		const { extensions = [], mdastExtensions = [] } = options;
+
+		return {
+			extensions: [...extensions, math()],
+			mdastExtensions: [...mdastExtensions, mathFromMarkdown()]
+		};
+	});
 </script>
 
-<Markdown {components} {directives} {options} {src} />
+<Markdown {ast} components={_components} {directives} options={_options} {src} />
