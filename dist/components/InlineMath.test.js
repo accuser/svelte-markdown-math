@@ -1,6 +1,6 @@
 import { render } from '@testing-library/svelte';
 import { describe, expect, test } from 'vitest';
-import InlineMath, {} from './InlineMath.svelte';
+import InlineMath from './InlineMath.svelte';
 describe('InlineMath.svelte', async () => {
     const it = test.extend({
         props: {
