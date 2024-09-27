@@ -1,9 +1,10 @@
 import { render } from '@testing-library/svelte';
+import type { ComponentProps } from 'svelte';
 import { describe, expect, test } from 'vitest';
-import Math, { type Props } from './Math.svelte';
+import Math from './Math.svelte';
 
 describe('Math.svelte', async () => {
-	const it = test.extend<{ props: Props }>({
+	const it = test.extend<{ props: ComponentProps<Math> }>({
 		props: {
 			type: 'math',
 			value: 'C'

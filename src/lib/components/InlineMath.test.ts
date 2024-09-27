@@ -1,9 +1,10 @@
 import { render } from '@testing-library/svelte';
+import type { ComponentProps } from 'svelte';
 import { describe, expect, test } from 'vitest';
-import InlineMath, { type Props } from './InlineMath.svelte';
+import InlineMath from './InlineMath.svelte';
 
 describe('InlineMath.svelte', async () => {
-	const it = test.extend<{ props: Props }>({
+	const it = test.extend<{ props: ComponentProps<InlineMath> }>({
 		props: {
 			type: 'inlineMath',
 			value: 'C'

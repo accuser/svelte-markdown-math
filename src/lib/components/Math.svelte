@@ -1,11 +1,8 @@
-<script lang="ts" module>
-	export type Props = import('mdast-util-math').Math;
-</script>
-
 <script lang="ts">
 	import katex from 'katex';
+	import type { Math } from 'mdast-util-math';
 
-	let { meta, value }: Props = $props();
+	let { value }: Math = $props();
 
 	let mathml = $derived.by(() =>
 		katex.renderToString(value, {
