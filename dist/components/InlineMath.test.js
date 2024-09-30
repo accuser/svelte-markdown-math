@@ -1,7 +1,10 @@
-import { render } from '@testing-library/svelte';
-import { describe, expect, test } from 'vitest';
+import { mount } from 'svelte';
+import { beforeEach, describe, expect, test } from 'vitest';
 import InlineMath from './InlineMath.svelte';
 describe('InlineMath.svelte', async () => {
+    beforeEach(() => {
+        document.body = document.createElement('body');
+    });
     const it = test.extend({
         props: {
             type: 'inlineMath',
@@ -9,15 +12,15 @@ describe('InlineMath.svelte', async () => {
         }
     });
     it('renders <span>', async ({ props }) => {
-        const { container } = render(InlineMath, { props });
-        expect(container.querySelector('span')).toBeInTheDocument();
+        mount(InlineMath, { props, target: document.body });
+        expect(document.body.querySelector('span')).toBeInTheDocument();
     });
     it('renders <span> with `katex` class', async ({ props }) => {
-        const { container } = render(InlineMath, { props });
-        expect(container.querySelector('span.katex')).toBeInTheDocument();
+        mount(InlineMath, { props, target: document.body });
+        expect(document.body.querySelector('span.katex')).toBeInTheDocument();
     });
     it('renders <span> with content', async ({ props }) => {
-        const { container } = render(InlineMath, { props });
-        expect(container.querySelector('span.katex')).toHaveTextContent('C');
+        mount(InlineMath, { props, target: document.body });
+        expect(document.body.querySelector('span.katex')).toHaveTextContent('C');
     });
 });
